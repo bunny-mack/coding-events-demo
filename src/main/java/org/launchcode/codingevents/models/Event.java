@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
@@ -20,14 +18,29 @@ public class Event {
     @Size(max = 500, message = "Description too long!")
     private String description;
 
+    @NotNull(message = "Location is required.")
+    @NotBlank(message = "Location is required.")
+    private String location;
+
+    @AssertTrue(message = "Required field")
+    private Boolean registrationRequired;
+
+    @NotNull(message = "Required field")
+    @Min(1)
+    //@NotBlank(message = "Required field")
+    private Integer attendees;
+
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String location, Boolean registrationRequired, Integer attendees, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
+        this.location = location;
+        this.registrationRequired = registrationRequired;
+        this.attendees = attendees;
         this.contactEmail = contactEmail;
     }
 
@@ -58,6 +71,30 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getRegistrationRequired() {
+        return registrationRequired;
+    }
+
+    public void setRegistrationRequired(Boolean registrationRequired) {
+        this.registrationRequired = registrationRequired;
+    }
+
+    public Integer getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(Integer attendees) {
+        this.attendees = attendees;
     }
 
     public int getId() {
