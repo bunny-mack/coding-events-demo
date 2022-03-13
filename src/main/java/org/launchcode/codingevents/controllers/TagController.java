@@ -21,7 +21,7 @@ import javax.validation.Valid;
 public class TagController {
 
     @Autowired
-    TagRepository tagRepository;
+    private TagRepository tagRepository;
 
     @GetMapping
     public String displayTags(Model model) {
